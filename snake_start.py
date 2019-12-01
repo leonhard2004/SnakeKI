@@ -3,10 +3,6 @@ keyboard = Controller()
 import time
 import pygame as pg, random as rnd
 from snake_KI import wand_layer
-from snake_KI import snake_layer
-
-richtungen = {pg.K_s: (0,1), pg.K_DOWN: (0,1), pg.K_w: (0,-1), pg.K_UP: (0,-1), pg.K_a: (-1,0),
-              pg.K_LEFT: (-1,0), pg.K_d: (1,0), pg.K_RIGHT: (1,0)}
 
 def spielstart():
  BREITE, HÖHE = 1000, 600
@@ -15,6 +11,8 @@ def spielstart():
  snake = [(BREITE//2, HÖHE//2)]
  richt_x, richt_y = 1, 0
  bonus_x, bonus_y = 300, 300
+ richtungen = {pg.K_s: (0,1), pg.K_DOWN: (0,1), pg.K_w: (0,-1), pg.K_UP: (0,-1), pg.K_a: (-1,0),
+ pg.K_LEFT: (-1,0), pg.K_d: (1,0), pg.K_RIGHT: (1,0)}
 
  pg.init()
  screen = pg.display.set_mode([BREITE, HÖHE])
@@ -26,17 +24,16 @@ def spielstart():
   clock.tick(tempo)
   screen.fill((0,0,0))
 
-  #ki_steuerung = wand_layer(richt_x, richt_y, score, tempo, snake, bonus_x, bonus_y, GRÖßE, BREITE, HÖHE)
-  snake_layer(snake)
   for ereignis in pg.event.get():
    if ereignis.type == pg.QUIT:
     weitermachen = False
    if ereignis.type == pg.KEYDOWN and ereignis.key in richtungen:
     richt_x, richt_y = richtungen[ereignis.key]
 
-  #richt_x, richt_y = ki_steuerung
-
   x,y = snake[-1]
+  ki_steuerung = wand_layer(richt_x, richt_y, score, tempo, snake, bonus_x, bonus_y, GRÖßE, BREITE, HÖHE, x, y)
+
+
   x,y = x + richt_x * GRÖßE, y + richt_y * GRÖßE
   if x < 0 or x + GRÖßE > BREITE or y < 0 or y + GRÖßE > HÖHE or (x,y) in snake:
    weitermachen = False
@@ -49,6 +46,8 @@ def spielstart():
    bonus_y = rnd.randrange(HÖHE) // GRÖßE * GRÖßE
   else:
    del snake[0]
+
+
 
   for x,y in snake:
    pg.draw.rect(screen,(0,255,0),(x,y,GRÖßE, GRÖßE))
