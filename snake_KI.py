@@ -120,27 +120,31 @@ def food(kopf_x, kopf_y, richt_x, richt_y, score, tempo, snake, bonus_x, bonus_y
  l_23 = [0]
  l_24 = [0]
 
+ #rechts oben
  if bonus_x >= kopf_x and bonus_y <= kopf_y:
   if (kopf_y - bonus_y) == (bonus_x - kopf_x):
    l_21.append(math.sqrt((kopf_x - bonus_x) * (kopf_x - bonus_x) + (bonus_y - kopf_y) * (bonus_y - kopf_y) // 28))
-   l_21 = (l_21[-1] // GRÖßE) + 1
+   l_21 = (l_21[-1] // GRÖßE)
 
+ #rechts unten
  if kopf_x <= bonus_x and kopf_y <= bonus_y:
   if (bonus_y - kopf_y) == (bonus_x - kopf_x):
    l_22.append(math.sqrt((bonus_x - kopf_x) * (bonus_x - kopf_x) + (bonus_y - kopf_y) * (bonus_y - kopf_y) // 28))
-   l_22 = (l_22[-1] // GRÖßE) + 1
+   l_22 = (l_22[-1] // GRÖßE)
 
- if kopf_x <= bonus_x and kopf_y >= bonus_y:
-  if (kopf_y - bonus_y) == (bonus_x - kopf_x):
-   l_23.append(math.sqrt((bonus_x - kopf_x) * (bonus_x - kopf_x) + (kopf_y - bonus_y) * (kopf_y - bonus_y) // 28))
-   l_23 = (l_23[-1] // GRÖßE) + 1
+ #links unten
+ if kopf_x >= bonus_x and kopf_y <= bonus_y:
+  if (bonus_y - kopf_y) == (kopf_x - bonus_x):
+   l_23.append(math.sqrt((kopf_x - bonus_x) * (kopf_x - bonus_x) + (bonus_y - kopf_y) * (bonus_y - kopf_y) // 28))
+   l_23 = (l_23[-1] // GRÖßE)
 
+ #links oben
  if kopf_x >= bonus_x and kopf_y >= bonus_y:
   if (kopf_y - bonus_y) == (kopf_x - bonus_x):
    l_24.append(math.sqrt((kopf_x - bonus_x) * (kopf_x - bonus_x) + (kopf_y - bonus_y) * (kopf_y - bonus_y) // 28))
-   l_24 = (l_24[-1] // GRÖßE) + 1
+   l_24 = (l_24[-1] // GRÖßE)
 
-
+ print(l_21, l_22, l_23, l_24)
 
  ki_steuerung = lernen(l_1, l_2, l_3, l_4, l_5, l_6, l_7, l_8, l_9, l_10, l_12, l_13, l_14, l_15, l_16, l_17, l_18, l_19, l_20, l_21, l_22, l_23, l_24)
  return ki_steuerung
