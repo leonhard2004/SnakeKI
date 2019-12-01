@@ -30,10 +30,10 @@ def spielstart():
    if ereignis.type == pg.KEYDOWN and ereignis.key in richtungen:
     richt_x, richt_y = richtungen[ereignis.key]
 
-  x,y = snake[-1]
-  ki_steuerung = wand_layer(richt_x, richt_y, score, tempo, snake, bonus_x, bonus_y, GRÖßE, BREITE, HÖHE, x, y)
 
+  ki_steuerung = wand_layer(richt_x, richt_y, score, tempo, snake, bonus_x, bonus_y, GRÖßE, BREITE, HÖHE)
 
+  x, y = snake[-1]
   x,y = x + richt_x * GRÖßE, y + richt_y * GRÖßE
   if x < 0 or x + GRÖßE > BREITE or y < 0 or y + GRÖßE > HÖHE or (x,y) in snake:
    weitermachen = False
